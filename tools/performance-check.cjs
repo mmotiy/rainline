@@ -131,7 +131,7 @@ const server = http.createServer((req, res) => {
       Math.random = () => {seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296;};
     });
     await page.goto('http://127.0.0.1:' + server.address().port + '/?manual');
-    await page.waitForFunction(() => window.__rainline, {timeout: 180000});
+    await page.waitForFunction(() => window.__rainline, null, {timeout: 180000});
     await page.evaluate(() => window.__perf.prepare());
     const result = await page.evaluate(async () => {
       const p = window.__perf;
@@ -201,7 +201,7 @@ const server = http.createServer((req, res) => {
         Math.random = () => {seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296;};
       });
       await driving.goto('http://127.0.0.1:' + server.address().port + '/?manual');
-      await driving.waitForFunction(() => window.__rainline, {timeout: 180000});
+      await driving.waitForFunction(() => window.__rainline, null, {timeout: 180000});
       await driving.evaluate(() => window.__perf.prepare());
       result.continuous[enabled ? 'after' : 'before'] = await driving.evaluate(enabled => window.__perf.continuous(enabled), enabled);
       await driving.close();
